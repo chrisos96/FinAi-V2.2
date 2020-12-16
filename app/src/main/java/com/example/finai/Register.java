@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
 
-    EditText mFullName, mEmail,mPassword,mPhone;
+    EditText mFullName, mEmail,mPassword,mRepeatPassword,mPhone;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
@@ -32,6 +32,7 @@ public class Register extends AppCompatActivity {
         mFullName = findViewById(R.id.fullName);
         mEmail = findViewById(R.id.Email);
         mPassword = findViewById(R.id.password);
+        mRepeatPassword = findViewById(R.id.RepeatPassword);
         mPhone = findViewById(R.id.phone);
         mRegisterBtn = findViewById(R.id.registerbtn);
         mLoginBtn = findViewById(R.id.createText);
@@ -49,6 +50,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
+                String repeatpassword = mRepeatPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
                     mEmail.setError("Email is Required");
@@ -61,6 +63,10 @@ public class Register extends AppCompatActivity {
 
                 if(password.length() < 6){
                     mPassword.setError("Password must be >= 6 characters");
+                }
+
+                if(password != repeatpassword){
+                    mRepeatPassword.setError("Passwords do not match");
                 }
 
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
