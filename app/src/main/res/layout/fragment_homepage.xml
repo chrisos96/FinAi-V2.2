@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="#FFFFFF"
-        android:text="Fragment"
+        android:text="Welcome to the FinAi App"
         android:textSize="30sp" />
 
 </RelativeLayout>

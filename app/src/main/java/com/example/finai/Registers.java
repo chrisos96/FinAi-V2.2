@@ -17,9 +17,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Register extends AppCompatActivity {
+public class Registers extends AppCompatActivity {
 
-    EditText mFullName, mEmail,mPassword,mRepeatPassword,mPhone;
+    EditText mFullName, mEmail, mPassword, mRepeatPassword, mPhone;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
@@ -29,22 +29,22 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mFullName = findViewById(R.id.fullName);
-        mEmail = findViewById(R.id.Email);
+        mFullName = findViewById(R.id.fullname);
+        mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mRepeatPassword = findViewById(R.id.RepeatPassword);
         mPhone = findViewById(R.id.phone);
-        mRegisterBtn = findViewById(R.id.registerbtn);
+        mRegisterBtn = findViewById(R.id.submit_form);
         mLoginBtn = findViewById(R.id.createText);
 
         fAuth = FirebaseAuth.getInstance();
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        if (fAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
 
-        mRegisterBtn.setOnClickListener(new View.OnClickListener(){
+        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -52,32 +52,32 @@ public class Register extends AppCompatActivity {
                 String password = mPassword.getText().toString().trim();
                 String repeatpassword = mRepeatPassword.getText().toString().trim();
 
-                if(TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required");
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Password is required");
                 }
 
-                if(password.length() < 6){
+                if (password.length() < 6) {
                     mPassword.setError("Password must be >= 6 characters");
                 }
 
-                if(password != repeatpassword){
+                if (password != repeatpassword) {
                     mRepeatPassword.setError("Passwords do not match");
                 }
 
-                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Registers.this, "User Created", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                        }else{
-                            Toast.makeText(Register.this, "Error!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Registers.this, "Error!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -87,7 +87,7 @@ public class Register extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),Login.class));
+                startActivity(new Intent(getApplicationContext(), Login.class));
             }
         });
 

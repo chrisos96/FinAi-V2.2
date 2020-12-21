@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
     tools:context=".Login">
 
 
@@ -12,17 +13,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:background="#FFFFFF"
         android:text="Forgot Password?"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createNew" />
+        app:layout_constraintTop_toBottomOf="@+id/createNewAccount" />
 
     <TextView
-        android:id="@+id/createNew"
+        android:id="@+id/createNewAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:background="#FFFFFF"
         android:text="Create new account here!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -46,19 +49,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textPersonName"
@@ -72,16 +77,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:background="#FFFFFF"
         android:text="Create New Account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Authenticator" />
+        app:layout_constraintTop_toBottomOf="@+id/support_title" />
 
     <TextView
-        android:id="@+id/Authenticator"
+        android:id="@+id/support_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:background="#FFFFFF"
         android:text="Authenticator"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

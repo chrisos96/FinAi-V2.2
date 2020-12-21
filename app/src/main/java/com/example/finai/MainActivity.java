@@ -83,11 +83,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SupportFragment()).commit();
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this,"Share",Toast.LENGTH_SHORT).show();
+            case R.id.nav_request:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new RequestProFragment()).commit();
                 break;
-            case R.id.nav_send:
-                Toast.makeText(this,"Send",Toast.LENGTH_SHORT).show();
+            case R.id.nav_review:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ReviewFragment()).commit();
+                break;
+            case R.id.nav_logout:
+                Toast.makeText(this,"Logged out",Toast.LENGTH_SHORT).show();
+                mAuth.signOut();
+                startActivity(new Intent(getApplicationContext(),Login.class));
                 break;
         }
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#04D50C"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/img_pro"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:contentDescription="TODO"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name_pro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fruit Name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/information_pro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Information" />
+
+    </LinearLayout>
+
+</LinearLayout>

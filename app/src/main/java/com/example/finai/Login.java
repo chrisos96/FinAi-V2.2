@@ -22,9 +22,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
-    EditText mEmail,mPassword;
+    EditText mEmail, mPassword;
     Button mLoginToAppBtn;
-    TextView mCreateBtn, forgotTextLink;
+    TextView mCreateNewAccountBtn, forgotTextLink;
     FirebaseAuth fAuth;
 
     @Override
@@ -32,13 +32,21 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmail = findViewById(R.id.Email);
+        mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.Password);
         mLoginToAppBtn = findViewById(R.id.Login);
-        mCreateBtn =findViewById(R.id.createNew);
+        mCreateNewAccountBtn = findViewById(R.id.createNewAccount);
         forgotTextLink = findViewById(R.id.forgotPassword);
 
         fAuth = FirebaseAuth.getInstance();
+
+
+        mCreateNewAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Registers.class));
+            }
+        });
 
 
         mLoginToAppBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,17 +56,17 @@ public class Login extends AppCompatActivity {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
-                if(TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required.");
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Password is Required.");
                     return;
                 }
 
-                if(password.length() < 6){
+                if (password.length() < 6) {
                     mPassword.setError("Password Must be >= 6 Characters");
                     return;
                 }
@@ -66,13 +74,13 @@ public class Login extends AppCompatActivity {
 
                 // authenticate the user
 
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        }else {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
                             Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
@@ -83,14 +91,7 @@ public class Login extends AppCompatActivity {
         });
 
 
-        mCreateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Register.class));
-            }
-        });
-
-        forgotTextLink.setOnClickListener(new View.OnClickListener(){
+        forgotTextLink.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -111,7 +112,7 @@ public class Login extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(Login.this, "Reset Link has been sent to your email!", Toast.LENGTH_SHORT).show();
                             }
-                        }) .addOnFailureListener(new OnFailureListener() {
+                        }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(Login.this, "Error, link not sent! " + e.getMessage(), Toast.LENGTH_SHORT).show();
