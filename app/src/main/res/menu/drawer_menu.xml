@@ -11,12 +11,17 @@
             android:title="Homepage" />
 
         <item
-            android:id="@+id/nav_chat"
+            android:id="@+id/nav_loan"
+            android:icon="@drawable/ic_chat"
+            android:title="Loan Application" />
+
+        <item
+            android:id="@+id/nav_house"
             android:icon="@drawable/ic_chat"
             android:title="House Specification" />
 
         <item
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_chat"
             android:icon="@drawable/ic_message"
             android:title="Chatbot" />
 

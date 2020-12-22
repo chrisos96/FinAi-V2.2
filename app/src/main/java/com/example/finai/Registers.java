@@ -3,6 +3,7 @@ package com.example.finai;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +17,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.security.SecureRandom;
+import java.util.ArrayList;
 
 public class Registers extends AppCompatActivity {
 
@@ -23,11 +29,16 @@ public class Registers extends AppCompatActivity {
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Client");
 
         mFullName = findViewById(R.id.fullname);
         mEmail = findViewById(R.id.email);
@@ -48,8 +59,9 @@ public class Registers extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+                final String username = mFullName.getText().toString().trim();
+                final String email = mEmail.getText().toString().trim();
+                final String password = mPassword.getText().toString().trim();
                 String repeatpassword = mRepeatPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
@@ -74,12 +86,19 @@ public class Registers extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Registers.this, "User Created", Toast.LENGTH_SHORT).show();
+                            SecureRandom random = new SecureRandom();
+                            int num = random.nextInt(100000);
+                            @SuppressLint("DefaultLocale") String formatted = String.format("%05d", num);
+                            System.out.println(formatted);
+                            String combine = username+formatted;
+                            RegisterDatabaseHelper helper = new RegisterDatabaseHelper(combine,email,password);
+                            reference.child(username+formatted).setValue(helper);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
                         } else {
                             Toast.makeText(Registers.this, "Error!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
+
                 });
             }
         });
