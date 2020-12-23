@@ -73,14 +73,45 @@ public class LoanFragment extends Fragment {
                 int scredit_history = Integer.parseInt(credit_history.getEditableText().toString().trim());
                 int sproperty_area = Integer.parseInt(property_area.getEditableText().toString().trim());
 
-
-                if (sgender > 2){
+                if (sloan_id.equals("")) {
+                    loan_id.setError("Field must not be empty");
+                }
+                if (sgender > 2 || sgender < 0 || String.valueOf(sgender).equals("")){
                     gender.setError("Value must be either [0] or [1]");
                 }
+                if (smarried > 2 || smarried < 0 || String.valueOf(smarried).equals("")){
+                    married.setError("Value must be either [0] or [1]");
+                }
+                if (sdependents > 2 || sdependents < 0 || String.valueOf(sdependents).equals("")){
+                    dependents.setError("Value must be either [0] or [1]");
+                }
+                if (seducation > 2 || seducation < 0 || String.valueOf(seducation).equals("")){
+                    education.setError("Value must be either [0] or [1]");
+                }
+                if (sself_employed > 2 || sself_employed < 0 || String.valueOf(sself_employed).equals("")){
+                    self_employed.setError("Value must be either [0] or [1]");
+                }
+                if (sapplicant_income < 0 || String.valueOf(sapplicant_income).equals("")){
+                    applicant_income.setError("Value must be greater than 0");
+                }
+                if (sco_applicant_income < 0 || String.valueOf(sco_applicant_income).equals("")) {
+                    co_applicant_income.setError("Value must be >= 0");
+                }
+                if (sloan_amount < 0 || String.valueOf(sloan_amount).equals("")){
+                    gender.setError("Value must be greater than 0");
+                }
+                if (scredit_history > 2 || scredit_history < 0 || String.valueOf(scredit_history).equals("")){
+                    credit_history.setError("Value must be either [0] or [1]");
+                }
+                if (sproperty_area > 2 || sproperty_area < 0 || String.valueOf(sproperty_area).equals("")){
+                    property_area.setError("Value must be either [0] or [1] or [2]");
+                }
+
                 else{
                     LoanFormDatabaseHelper helper = new LoanFormDatabaseHelper(sloan_id,sgender,smarried,sdependents,seducation,sself_employed,sapplicant_income,sco_applicant_income,sloan_amount,scredit_history,sproperty_area);
                     reference.child(sloan_id).setValue(helper);
                     Toast.makeText(getActivity(),"Loan Application Form submitted!",Toast.LENGTH_SHORT).show();
+                    loan_id.setText("");
                     gender.setText("");
                     married.setText("");
                     dependents.setText("");
